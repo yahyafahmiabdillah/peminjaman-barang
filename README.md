@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sistem Peminjaman Barang (CRUD App)
 
-## Getting Started
+Aplikasi web untuk mencatat, memantau, dan memperbarui status peminjaman barang/aset kantor secara *real-time*.
 
-First, run the development server:
+## Tech Stack
+- **Frontend:** Next.js (App Router), React Hooks (`useState`, `useEffect`), Tailwind CSS
+- **REST API:** MockAPI.io
+- **Deployment:** Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dokumentasi Fitur
+1. **Catat Peminjaman (Create):** Menambahkan data barang yang dipinjam beserta nama peminjam, kategori, dan status.
+2. **Daftar & Filter Barang (Read):** Menampilkan seluruh riwayat peminjaman dari API dan memfilter tampilan (`Semua`, `Dipinjam`, `Dikembalikan`).
+3. **Edit & Pengembalian Cepat (Update):** Mengubah detail peminjaman atau menandai barang sudah dikembalikan dalam satu klik.
+4. **Hapus Data (Delete):** Menghapus catatan peminjaman dari database.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Dokumentasi REST API
 
-## Learn More
+**Base URL:** `https://6afbd343892984c4494a6658.mockapi.io/api/v1`
 
-To learn more about Next.js, take a look at the following resources:
+| Method | Endpoint | Deskripsi |
+| :--- | :--- | :--- |
+| `GET` | `/loans` | Mengambil seluruh daftar peminjaman barang |
+| `POST` | `/loans` | Menambahkan data peminjaman baru |
+| `PUT` | `/loans/:id` | Memperbarui data atau status peminjaman berdasarkan ID |
+| `DELETE` | `/loans/:id` | Menghapus data peminjaman berdasarkan ID |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Contoh Request Body (`POST /loans` & `PUT /loans/:id`)
+```json
+{
+  "itemName": "MacBook Pro M2",
+  "borrowerName": "Fahmi",
+  "category": "Laptop",
+  "status": "Dipinjam"
+}

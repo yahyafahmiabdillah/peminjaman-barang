@@ -1,29 +1,24 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export default function LoanForm({
-  onSave,
-  editingLoan,
-  onCancelEdit,
-  submitting,
-}) {
-  const [itemName, setItemName] = useState("");
-  const [borrowerName, setBorrowerName] = useState("");
-  const [category, setCategory] = useState("Laptop");
-  const [status, setStatus] = useState("Dipinjam");
+export default function LoanForm({ onSave, editingLoan, onCancelEdit, submitting }) {
+  const [itemName, setItemName] = useState('');
+  const [borrowerName, setBorrowerName] = useState('');
+  const [category, setCategory] = useState('Laptop');
+  const [status, setStatus] = useState('Dipinjam');
 
   useEffect(() => {
     if (editingLoan) {
-      setItemName(editingLoan.itemName || "");
-      setBorrowerName(editingLoan.borrowerName || "");
-      setCategory(editingLoan.category || "Laptop");
-      setStatus(editingLoan.status || "Dipinjam");
+      setItemName(editingLoan.itemName || '');
+      setBorrowerName(editingLoan.borrowerName || '');
+      setCategory(editingLoan.category || 'Laptop');
+      setStatus(editingLoan.status || 'Dipinjam');
     } else {
-      setItemName("");
-      setBorrowerName("");
-      setCategory("Laptop");
-      setStatus("Dipinjam");
+      setItemName('');
+      setBorrowerName('');
+      setCategory('Laptop');
+      setStatus('Dipinjam');
     }
   }, [editingLoan]);
 
@@ -31,24 +26,22 @@ export default function LoanForm({
     e.preventDefault();
     const success = await onSave({ itemName, borrowerName, category, status });
     if (success && !editingLoan) {
-      setItemName("");
-      setBorrowerName("");
-      setCategory("Laptop");
-      setStatus("Dipinjam");
+      setItemName('');
+      setBorrowerName('');
+      setCategory('Laptop');
+      setStatus('Dipinjam');
     }
   };
 
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 h-fit">
       <h2 className="text-base font-semibold text-white mb-4">
-        {editingLoan ? "Edit Data Peminjaman" : "Catat Peminjaman Baru"}
+        {editingLoan ? 'Edit Data Peminjaman' : 'Catat Peminjaman Baru'}
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4 text-sm">
         <div>
-          <label className="block text-xs text-slate-400 mb-1.5">
-            Nama Barang
-          </label>
+          <label className="block text-xs text-slate-400 mb-1.5">Nama Barang</label>
           <input
             type="text"
             required
@@ -60,9 +53,7 @@ export default function LoanForm({
         </div>
 
         <div>
-          <label className="block text-xs text-slate-400 mb-1.5">
-            Nama Peminjam
-          </label>
+          <label className="block text-xs text-slate-400 mb-1.5">Nama Peminjam</label>
           <input
             type="text"
             required
@@ -74,9 +65,7 @@ export default function LoanForm({
         </div>
 
         <div>
-          <label className="block text-xs text-slate-400 mb-1.5">
-            Kategori
-          </label>
+          <label className="block text-xs text-slate-400 mb-1.5">Kategori</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -107,11 +96,7 @@ export default function LoanForm({
             disabled={submitting}
             className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium py-2.5 rounded-xl transition cursor-pointer"
           >
-            {submitting
-              ? "Menyimpan..."
-              : editingLoan
-                ? "Update Data"
-                : "+ Pinjam Barang"}
+            {submitting ? 'Menyimpan...' : editingLoan ? 'Update Data' : '+ Pinjam Barang'}
           </button>
           {editingLoan && (
             <button
