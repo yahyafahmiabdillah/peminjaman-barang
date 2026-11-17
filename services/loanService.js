@@ -1,4 +1,4 @@
-const API_URL = 'https://6afbd343892984c4494a6658.mockapi.io/api/v1/loans';
+const API_URL = 'https://6afbd343892984c4494a6658.mockapi.io/api/v1/Loans';
 
 export const getLoans = async () => {
   const response = await fetch(API_URL, { cache: 'no-store' });
