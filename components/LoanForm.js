@@ -1,38 +1,37 @@
-'use client';
+'use client'; // Mengaktifkan mode interaktif browser agar form bisa menerima ketikan pengguna
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Mengimpor fitur memori sementara (state) dan efek otomatis dari React
 
-export default function LoanForm({ onSave, editingLoan, onCancelEdit, submitting }) {
-  const [itemName, setItemName] = useState('');
-  const [borrowerName, setBorrowerName] = useState('');
-  const [category, setCategory] = useState('Laptop');
-  const [status, setStatus] = useState('Dipinjam');
+export default function LoanForm({ onSave, editingLoan, onCancelEdit, submitting }) { // Membuat komponen form & menerima data/fungsi (props) dari page.js
+  const [itemName, setItemName] = useState(''); // Menyimpan teks ketikan untuk kolom Nama Barang
+  const [borrowerName, setBorrowerName] = useState(''); // Menyimpan teks ketikan untuk kolom Nama Peminjam
+  const [category, setCategory] = useState('Laptop'); // Menyimpan pilihan Kategori (pilihan awal 'Laptop')
+  const [status, setStatus] = useState('Dipinjam'); // Menyimpan pilihan Status (pilihan awal 'Dipinjam')
 
-  useEffect(() => {
-    if (editingLoan) {
-      setItemName(editingLoan.itemName || '');
-      setBorrowerName(editingLoan.borrowerName || '');
-      setCategory(editingLoan.category || 'Laptop');
-      setStatus(editingLoan.status || 'Dipinjam');
-    } else {
-      setItemName('');
-      setBorrowerName('');
-      setCategory('Laptop');
-      setStatus('Dipinjam');
-    }
-  }, [editingLoan]);
+  useEffect(() => { // Menjalankan perintah otomatis setiap kali tombol Edit di tabel diklik
+    if (editingLoan) { // Mengecek apakah ada data barang yang dikirim untuk diedit
+      setItemName(editingLoan.itemName || ''); // Mengisi kotak Nama Barang dengan data lama
+      setBorrowerName(editingLoan.borrowerName || ''); // Mengisi kotak Nama Peminjam dengan data lama
+      setCategory(editingLoan.category || 'Laptop'); // Mengatur pilihan Kategori sesuai data lama
+      setStatus(editingLoan.status || 'Dipinjam'); // Mengatur pilihan Status sesuai data lama
+    } else { // Jika tidak sedang mengedit (mode tambah baru atau klik Batal)
+      setItemName(''); // Mengosongkan kembali kotak Nama Barang
+      setBorrowerName(''); // Mengosongkan kembali kotak Nama Peminjam
+      setCategory('Laptop'); // Mengembalikan pilihan Kategori ke awal ('Laptop')
+      setStatus('Dipinjam'); // Mengembalikan pilihan Status ke awal ('Dipinjam')
+    } // Menutup percabangan if-else
+  }, [editingLoan]); // Memantau perubahan pada variabel editingLoan (jalan ulang kalau nilainya berubah)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await onSave({ itemName, borrowerName, category, status });
-    if (success && !editingLoan) {
-      setItemName('');
-      setBorrowerName('');
-      setCategory('Laptop');
-      setStatus('Dipinjam');
-    }
-  };
-
+  const handleSubmit = async (e) => { // Fungsi yang berjalan saat tombol Simpan / Update diklik
+    e.preventDefault(); // Mencegah halaman web me-refresh otomatis bawaan form HTML
+    const success = await onSave({ itemName, borrowerName, category, status }); // Mengirim semua isi form ke fungsi handleSave di page.js
+    if (success && !editingLoan) { // Jika simpan berhasil dan sedang dalam mode tambah baru (bukan edit)
+      setItemName(''); // Mengosongkan kotak Nama Barang agar siap dipakai input lagi
+      setBorrowerName(''); // Mengosongkan kotak Nama Peminjam
+      setCategory('Laptop'); // Mereset pilihan Kategori ke 'Laptop'
+      setStatus('Dipinjam'); // Mereset pilihan Status ke 'Dipinjam'
+    } // Menutup blok if
+  }; // Menutup fungsi handleSubmit
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 h-fit">
       <h2 className="text-base font-semibold text-white mb-4">
