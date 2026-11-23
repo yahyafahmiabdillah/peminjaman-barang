@@ -1,0 +1,21 @@
+name: 'Latihan CI CD'
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil kode dari repository
+        uses: actions/checkout@v4
+
+      - name: Tahap 1 - Simulasi Testing
+        run: echo "Mengecek struktur kode... Tidak ada error!"
+
+      - name: Tahap 2 - Simulasi Build
+        run: |
+          echo "Memulai proses build..."
+          ls -la
+          echo "Build selesai dan aplikasi siap tayang!"

@@ -17,14 +17,14 @@ export default function PeminjamanBarangPage() { // Membuat komponen utama halam
       try { // Mencoba menjalankan perintah ambil data dari API
         const data = await getLoans(); // Menunggu semua data peminjaman diambil dari MockAPI (Read)
         setLoans(data); // Memasukkan data dari API ke memori layar (state loans)
-      } // Menutup blok try
+      }
       catch (error) { // Menangkap error jika koneksi atau API gagal
         console.error(error); // Menampilkan detail error di console browser
       } // Menutup blok catch
        finally { // Blok yang pasti dijalankan baik proses sukses maupun gagal
         setLoading(false); // Mematikan teks loading setelah proses selesai
-      } // Menutup blok finally
-    }; // Menutup fungsi loadData
+      }
+    }
     loadData(); // Memanggil fungsi loadData agar langsung berjalan
   }, []);
 
