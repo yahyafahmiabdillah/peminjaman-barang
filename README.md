@@ -30,9 +30,14 @@ Aplikasi web untuk mencatat, memantau, dan memperbarui status peminjaman barang/
 
 ### Contoh Request Body (`POST /loans` & `PUT /loans/:id`)
 ```json
-{
-  "itemName": "MacBook Pro M2",
-  "borrowerName": "Fahmi",
-  "category": "Laptop",
-  "status": "Dipinjam"
-}
+[
+  {
+    "name": "name 1",
+    "avatar": "avatar 1",
+    "status": "Dipinjam",
+    "id": "1",
+    "itemName": "laptop",
+    "borrowerName": "yahya",
+    "category": "Laptop"
+  }
+]
