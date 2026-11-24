@@ -1,4 +1,4 @@
-name: 'Latihan CI CD'
+name: 'CI Next.js - Peminjaman Barang'
 
 on:
   push:
@@ -8,14 +8,16 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Ambil kode dari repository
+      - name: 1. Ambil kode dari repository
         uses: actions/checkout@v4
 
-      - name: Tahap 1 - Simulasi Testing
-        run: echo "Mengecek struktur kode... Tidak ada error!"
+      - name: 2. Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Tahap 2 - Simulasi Build
-        run: |
-          echo "Memulai proses build..."
-          ls -la
-          echo "Build selesai dan aplikasi siap tayang!"
+      - name: 3. Install library (npm install)
+        run: npm ci
+
+      - name: 4. Build aplikasi Next.js (Cek Error)
+        run: npm run build
